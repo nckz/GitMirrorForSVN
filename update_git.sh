@@ -7,7 +7,7 @@
 #        and git keys are set up to be automatic.
 
 set -e
-set -x
+#set -x
 
 SVN_REMOTE_URL=$1
 GIT_REMOTE_URL=$2
@@ -32,4 +32,4 @@ else
     git svn rebase
 fi
 
-git push origin ${GIT_REMOTE_BRANCH}
+git push origin master:${GIT_REMOTE_BRANCH}
