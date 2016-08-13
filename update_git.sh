@@ -9,11 +9,15 @@
 set -e
 #set -x
 
+date
+
 SVN_REMOTE_URL=$1
 GIT_REMOTE_URL=$2
 GIT_REMOTE_BRANCH=$3
 
-WORKING_DIR="./"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+WORKING_DIR=$DIR
+echo "moving to $DIR"
 cd $WORKING_DIR
 
 # rebase from svn
@@ -27,9 +31,11 @@ then
     git config core.autocrlf false
     git remote add origin ${GIT_REMOTE_URL}
 else
+    echo "Existing repo found..."
     echo "pulling changes from svn"
     cd ${LOCAL_REPO}
     git svn rebase
 fi
 
+echo "git push to $GIT_REMOTE_URL $GIT_REMOTE_BRANCH"
 git push origin master:${GIT_REMOTE_BRANCH}
