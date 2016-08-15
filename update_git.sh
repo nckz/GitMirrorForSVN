@@ -14,6 +14,7 @@ date
 SVN_REMOTE_URL=$1
 GIT_REMOTE_URL=$2
 GIT_REMOTE_BRANCH=$3
+LOCAL_REPO_SUFFIX=$4
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 WORKING_DIR=$DIR
@@ -21,7 +22,7 @@ echo "moving to $DIR"
 cd $WORKING_DIR
 
 # rebase from svn
-LOCAL_REPO=`basename $SVN_REMOTE_URL`
+LOCAL_REPO="`basename $SVN_REMOTE_URL`${LOCAL_REPO_SUFFIX}"
 if [ ! -d "${LOCAL_REPO}" ];
 then
     echo "Doing initial setup of repo, this could take a while..."
